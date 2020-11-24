@@ -8,7 +8,7 @@ passport.use(
   new LocalStrategy(
     // Our user will sign in using an email, rather than a "username"
     {
-      usernameField: "email"
+      usernameField: "email",
     },
     (email, password, done) => {
       // When a user tries to sign in this code runs
@@ -30,6 +30,8 @@ passport.use(
           });
         }
         // If none of the above, return the user
+        console.log( `this is the response for dbuser ${dbUser}`)
+        console.log(dbUser);
         return done(null, dbUser);
       });
     }
