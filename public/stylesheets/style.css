@@ -2,3 +2,12 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+.container{
+  color: aliceblue;
+}
+body{
+  background-color: #051937;
+}
+h2{
+  color: aliceblue;
+}
