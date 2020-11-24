@@ -73,10 +73,10 @@ module.exports = function(app) {
     db.Project.create({
       title: req.body.title,
       description: req.body.description,
-      UserId: req.session.passport.user.id
+      UserId: req.user.id
     })
       .then(() => {
-        res.redirect("/");
+        res.redirect('back');
       })
       .catch(err => {
         res.status(401).json(err);
