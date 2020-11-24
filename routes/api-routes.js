@@ -64,4 +64,25 @@ module.exports = function(app) {
       });
     }
   });
+
+
+
+  // Create Project Form
+  app.post("/api/create_project", (req, res) => {
+
+
+    db.Project.create({
+      title: req.body.title,
+      description: req.body.description,
+      UserId: req.session.passport.user.id
+    })
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+  })
+
+  
 };

@@ -44,14 +44,16 @@
                 <div class="modal-content">
                   <span class="close">&times;</span>
   
-                  <form action="post">
+                  <!-- Create a Project form -->
+                  <form action="/api/create_project" method="POST" id="createProject">
                     <h3>Create a Project</h3>
   
-                    <input type="text" placeholder="project title">
+                    <input type="text" name="title" placeholder="project title">
   
                     <label for="description">Description</label>
                     <textarea name="description" id="" cols="30" rows="10"></textarea>
-  
+
+                    <input type="submit">
                   </form>
   
                 </div>
