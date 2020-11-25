@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Project.associate = function(models) {
-        Project.belongsTo(models.Project, {
+        Project.belongsTo(models.User, {
           foreignKey: {
             allowNull: false
           }
