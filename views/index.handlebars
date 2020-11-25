@@ -24,14 +24,12 @@
           <div class="col">
               <!-- Trigger/Open The Modal -->
               <button id="myBtn">Open Modal</button>
-  
               <!-- The Modal -->
               <div id="myModal" class="modal">
-  
                 <!-- Modal content -->
                 <div class="modal-content">
                   <span class="close">&times;</span>
-  
+
                   <!-- Create a Project form -->
                   <form action="/api/create_project" method="POST" id="createProject">
                     <h3>Create a Project</h3>
@@ -43,12 +41,10 @@
 
                     <input type="submit">
                   </form>
-  
                 </div>
               </div>
             </div>
         </div>
-          
   
           <!-- Cards -->
           <div class="row">
@@ -66,14 +62,23 @@
               {{/each}}
             </div>
           </div>
-  
+
       </div>
-  
+
+
+      <!-- Search Section -->
       <div class="col-md-6">
-        <!-- Search Section UPDATE -->
-        <button type="button" class="collapsible">Open Collapsible</button>
-        <div class="content">
-          <p>Lorem ipsum...</p>
+
+        <form class="search-form">
+
+          <input type="search" id="term" name="term" placeholder="search here">
+
+          <input type="submit" id="searchBtn">Search</button>
+
+        </form>
+
+        <div class="searchContent">
+          
         </div>
   
       </div>

@@ -1,6 +1,8 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -69,7 +71,6 @@ module.exports = function(app) {
   // Create Project Form
   app.post("/api/create_project", (req, res) => {
 
-
     db.Project.create({
       title: req.body.title,
       description: req.body.description,
@@ -82,6 +83,25 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   })
+
+  // Search Projects
+
+  app.get("/api/titlesearch/:term", (req, res) => {
+   
+    const term = req.params.term;
+
+    db.Project.findAll({
+      where: { title: { [Op.like]: '%'+ term + '%'}
+    }})
+    .then((searchResults) => {
+      return res.json(searchResults);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    })
+
+  })
+
 
   
 };
