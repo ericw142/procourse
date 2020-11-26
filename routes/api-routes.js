@@ -4,7 +4,7 @@ const passport = require("../config/passport");
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -71,18 +71,33 @@ module.exports = function(app) {
   // Create Project Form
   app.post("/api/create_project", (req, res) => {
 
-    db.Project.create({
-      title: req.body.title,
-      description: req.body.description,
-      UserId: req.user.id
-    })
-      .then(() => {
-        res.redirect('back');
+    let errors = [];
+
+    if (!req.body.title) {
+      errors.push({ text: "Did Not Add A Title, Project Not Saved, Click Home To Return " });
+      res.render('error', { errors })
+
+    }
+    else if (!req.body.description) {
+      errors.push({ text: "Did Not Add A Description, Project Not Saved, Click Home To Return" });
+      res.render('error', { errors })
+    }
+
+    else {
+      db.Project.create({
+        title: req.body.title,
+        description: req.body.description,
+        UserId: req.user.id
       })
-      .catch(err => {
-        res.status(401).json(err);
-      });
+        .then(() => {
+          res.redirect('back');
+        })
+        .catch(err => {
+          res.status(401).json(err);
+        });
+    }
   })
+
 
   // Project Search
 
@@ -90,14 +105,16 @@ module.exports = function(app) {
     let term = req.params.term;
 
     db.Project.findAll({
-      where: { title: { [Op.like]: '%'+ term + '%'}
-    }})
-    .then((searchResults) => {
-      return res.json(searchResults);
+      where: {
+        title: { [Op.like]: '%' + term + '%' }
+      }
     })
-    .catch(err => {
-      res.status(401).json(err);
-    })
+      .then((searchResults) => {
+        return res.json(searchResults);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
 
   })
 
@@ -105,22 +122,22 @@ module.exports = function(app) {
     let term = req.params.term;
 
     db.User.findAll({
-      where: { 
+      where: {
         [Op.or]: [
-          {firstName: { [Op.like]: '%'+ term + '%'}},
-          {lastName:  { [Op.like]: '%'+ term + '%' }},
-          {username: { [Op.like]: '%'+ term + '%' }},
-          {email: { [Op.like]: '%'+ term + '%' }}
+          { firstName: { [Op.like]: '%' + term + '%' } },
+          { lastName: { [Op.like]: '%' + term + '%' } },
+          { username: { [Op.like]: '%' + term + '%' } },
+          { email: { [Op.like]: '%' + term + '%' } }
         ]
       },
       include: [db.Project]
     })
-    .then((searchResults) => {
-      return res.json(searchResults);
-    })
-    .catch(err => {
-      res.status(401).json(err);
-    })
+      .then((searchResults) => {
+        return res.json(searchResults);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
 
   })
 
@@ -133,13 +150,13 @@ module.exports = function(app) {
         id: a
       }
     })
-    .then((dbProjects) => {
-      res.reload(dbProjects);
-    })
-    .catch(err => {
-      res.status(401).json(err);
-    });
+      .then((dbProjects) => {
+        res.reload(dbProjects);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
 
   })
-  
+
 };
