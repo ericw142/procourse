@@ -99,5 +99,21 @@ $(document).ready(() => {
     })
 
   });
+
+  //  delete projects
+  $(".del").on('click', function() {
+     let id = $(this).data('value');
+     console.log(id);
+    $.ajax({
+      method: "DELETE",
+      url: "/api/delete_project/"  + id
+    })
+    .then(() =>{
+      alert('project deleted');
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
     
 });
