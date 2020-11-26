@@ -102,6 +102,23 @@ module.exports = function(app) {
 
   })
 
+  // delete project
+  app.delete("/api/delete_project/:id", (req, res) => {
+    let a = req.params.id;
+    db.Project.destroy({
+      where: {
+        id: a
+      }
+    })
+    .then((dbProjects) => {
+      res.reload(dbProjects);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    });
+
+  })
+
 
   
 };
