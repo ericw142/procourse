@@ -84,11 +84,10 @@ module.exports = function(app) {
       });
   })
 
-  // Search Projects
+  // Project Search
 
   app.get("/api/titlesearch/:term", (req, res) => {
-   
-    const term = req.params.term;
+    let term = req.params.term;
 
     db.Project.findAll({
       where: { title: { [Op.like]: '%'+ term + '%'}
@@ -102,6 +101,28 @@ module.exports = function(app) {
 
   })
 
+  app.get("/api/usersearch/:term", (req, res) => {
+    let term = req.params.term;
+
+    db.User.findAll({
+      where: { 
+        [Op.or]: [
+          {firstName: { [Op.like]: '%'+ term + '%'}},
+          {lastName:  { [Op.like]: '%'+ term + '%' }},
+          {username: { [Op.like]: '%'+ term + '%' }},
+          {email: { [Op.like]: '%'+ term + '%' }}
+        ]
+      },
+      include: [db.Project]
+    })
+    .then((searchResults) => {
+      return res.json(searchResults);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    })
+
+  })
 
   
 };
