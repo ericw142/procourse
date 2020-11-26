@@ -2,7 +2,7 @@ $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
   $.get("/api/user_data").then(data => {
-    console.log(data);
+    
     $(".member-name").text(`${data.firstname}  ${data.lastname}`);
   });
 
@@ -32,32 +32,69 @@ $(document).ready(() => {
   $(".search-form").on("submit", function(event) {
     event.preventDefault();
     let term = $("#term").val();
+   
+    // Gets the filter user is searching by
+    let filter = $("#searchType").val();
 
-    
+    let queryUrl;
+
+    // TODO -- CREATE IF STATEMENT TO CHECK DIFFERENT TYPES OF SEARCHES AND CREATE AJAX QUERYURL
+    if (filter === 'title') {
+      queryUrl = "/api/titlesearch/"+term;
+    } else if (filter === 'user') {
+      queryUrl = "/api/usersearch/"+term;
+    }
+    else {
+      alert("Double check your search");
+      return;
+    }
 
     $.ajax({
-      url: "/api/titlesearch/"+term,
+      url: queryUrl,
       method: "GET"
     }).then(function(response) {
       $(".searchContent").empty();
-      console.log(response);
+      
+      if (filter === 'title') {
+          // Creating Search Results from Title
+          for (var i = 0; i < response.length; i++) {
 
-      // Creating Search result elements
-      for (var i = 0; i < response.length; i++) {
-        console.log(response[i]);
+            let searchCard = $("<div>");
 
-        let searchCard = $("<div>");
+            let searchTitle = $("<p>");
+            searchTitle.text(response[i].title);
+            searchCard.append(searchTitle);
 
-        let searchTitle = $("<p>");
-        searchTitle.text(response[i].title);
-        searchCard.append(searchTitle);
+            let searchDesc = $("<p>");
+            searchDesc.text(response[i].description);
+            searchCard.append(searchDesc);
 
-        let searchDesc = $("<p>");
-        searchDesc.text(response[i].description);
-        searchCard.append(searchDesc);
-
-        $(".searchContent").prepend(searchCard);
+            $(".searchContent").prepend(searchCard);
+          }
       }
+      
+      if (filter === 'user') {
+        console.log(response);
+        // Creating Search Results from User
+        for (var i = 0; i < response.length; i++) {
+          // Prepends all projects from matching users
+          for (var x = 0; x < response[i].Projects.length; x++) {
+            let searchCard = $("<div>");
+
+            let searchTitle = $("<p>");
+            searchTitle.text(response[i].Projects[x].title);
+            searchCard.append(searchTitle);
+
+            let searchDesc = $("<p>");
+            searchDesc.text(response[i].Projects[x].description);
+            searchCard.append(searchDesc);
+
+            $(".searchContent").prepend(searchCard);
+          }
+          
+        }
+      }
+
 
     })
 
