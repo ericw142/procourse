@@ -19,6 +19,7 @@ $(document).ready(() => {
     };
 
     if (!userData.email || !userData.password || !userData.email || !userData.firstName || !userData.lastName || !userData.userName) {
+      handleLoginErr();
       return;
     }
     // If we have an email and password, run the signUpUser function
@@ -48,7 +49,7 @@ $(document).ready(() => {
   }
 
   function handleLoginErr(err) {
-    $("#alert .msg").text(err.responseJSON);
+    $("#alert .msg").text("All feilds are required for new users, Existing users please visit log in");
     $("#alert").fadeIn(500);
   }
 });
