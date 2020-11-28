@@ -1,11 +1,7 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "password",
-=======
     "password": "password123",
->>>>>>> 679d8ca3ffc72a11a4bf4a29e92aaf413495a671
     "database": "findaproject_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
