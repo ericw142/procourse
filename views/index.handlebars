@@ -25,13 +25,16 @@
                   <span class="close">&times;</span>
 
                   <!-- Create a Project form -->
-                  <form action="/api/create_project" method="POST" id="createProject">
+                  <form action="/api/create_project" method="POST" id="create-form">
                     <h3>Create a Project</h3>
   
                     <input type="text" name="title" placeholder="project title">
   
                     <label for="description">Description</label>
                     <textarea name="description" id="" cols="30" rows="10"></textarea>
+
+                    <label for="tag">Add Tags</label>
+                    <input type="text" name="tag" placeholder="seperate tags by comma">
 
                     <input type="submit">
                   </form>
@@ -47,7 +50,7 @@
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                     <h5 class="card-title">{{title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
                     <p class="card-text">{{description}}</p>
                     <a href="#" class="card-link">Card link</a>
                     <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
@@ -75,7 +78,7 @@
             <option value="user">By User</option>
           </select>
 
-          <input type="submit" id="searchBtn" value="Search"></button>
+          <input type="submit" id="searchBtn" value="Search"></input>
 
         </form>
 

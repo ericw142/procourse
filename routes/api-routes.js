@@ -2,6 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const Sequelize = require('sequelize');
+const { create } = require("express-handlebars");
 const Op = Sequelize.Op;
 
 module.exports = function (app) {
@@ -71,6 +72,19 @@ module.exports = function (app) {
   // Create Project Form
   app.post("/api/create_project", (req, res) => {
 
+    db.Project.create({
+      title: req.body.title,
+      description: req.body.description,
+      UserId: req.user.id,
+      tag: req.body.tag
+    }).then(() => {
+      res.redirect('back');
+    })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+
+      
     let errors = [];
 
     if (!req.body.title) {
