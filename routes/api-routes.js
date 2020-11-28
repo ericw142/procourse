@@ -2,6 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const Sequelize = require('sequelize');
+const { create } = require("express-handlebars");
 const Op = Sequelize.Op;
 
 module.exports = function(app) {
@@ -74,11 +75,11 @@ module.exports = function(app) {
     db.Project.create({
       title: req.body.title,
       description: req.body.description,
-      UserId: req.user.id
+      UserId: req.user.id,
+      tag: req.body.tag
+    }).then(() => {
+      res.redirect('back');
     })
-      .then(() => {
-        res.redirect('back');
-      })
       .catch(err => {
         res.status(401).json(err);
       });

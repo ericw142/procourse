@@ -80,6 +80,7 @@ $(document).ready(() => {
           // Prepends all projects from matching users
           for (var x = 0; x < response[i].Projects.length; x++) {
             let searchCard = $("<div>");
+            searchCard.addClass('searchCard')
 
             let searchTitle = $("<p>");
             searchTitle.text(response[i].Projects[x].title);

@@ -7,6 +7,9 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        tag: {
+          type: DataTypes.STRING,
         }
     });
 
@@ -16,5 +19,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
           }
         })}
+       
     return Project;
 };
