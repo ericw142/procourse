@@ -99,6 +99,18 @@ module.exports = function (app) {
     }
   })
 
+  // Project Details Page
+  app.get("/projectdetails/:id", (req, res) => {
+    let projectID = req.params.id;
+      db.Project.findOne({
+        where: {
+          id: projectID
+        }
+      }).then((project) => {
+        res.render("project", { project });
+      })
+    
+  })
 
   // Project Search
 

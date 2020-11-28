@@ -53,16 +53,20 @@ $(document).ready(() => {
       url: queryUrl,
       method: "GET"
     }).then(function(response) {
+
       $(".searchContent").empty();
       
       if (filter === 'title') {
+        console.log(response);
           // Creating Search Results from Title
           for (var i = 0; i < response.length; i++) {
 
             let searchCard = $("<div>");
 
-            let searchTitle = $("<p>");
+            let searchTitle = $("<a>");
             searchTitle.text(response[i].title);
+            searchTitle.data("id", response[i].id);
+            searchTitle.attr("href", "/projectdetails/"+response[i].id);
             searchCard.append(searchTitle);
 
             let searchDesc = $("<p>");
@@ -82,8 +86,10 @@ $(document).ready(() => {
             let searchCard = $("<div>");
             searchCard.addClass('searchCard')
 
-            let searchTitle = $("<p>");
+            let searchTitle = $("<a>");
             searchTitle.text(response[i].Projects[x].title);
+            searchTitle.data("id", response[i].id);
+            searchTitle.attr("href", "/projectdetails/"+response[i].id);
             searchCard.append(searchTitle);
 
             let searchDesc = $("<p>");

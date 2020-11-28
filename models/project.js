@@ -19,6 +19,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
           }
         })}
+
+    Project.associate = function(models) {
+      Project.hasMany(models.Collaborator, {
+        onDelete: "cascade"
+      });
+    };
        
     return Project;
 };
