@@ -159,4 +159,42 @@ module.exports = function (app) {
 
   })
 
+  // --------Update------
+  app.get("/api/update/:id", (req, res) => {
+    db.Project.findOne({
+      where: {
+        id: req.params.id
+      },
+
+    })
+      .then((project) => {
+        res.render("update", { project });
+        console.log(project);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
+
+  });
+
+
+  app.put("/api/update", function (req, res) {
+    console.log(req.body);
+    db.Project.update(
+
+      {
+        title: req.body.title,
+        description: req.body.description
+      },
+      {
+        where: {
+          id: req.body.id
+        }
+
+      }
+    ).then(result => {
+      res.render("update", result)
+    })
+  });
+
 };
