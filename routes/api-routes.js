@@ -72,19 +72,6 @@ module.exports = function (app) {
   // Create Project Form
   app.post("/api/create_project", (req, res) => {
 
-    db.Project.create({
-      title: req.body.title,
-      description: req.body.description,
-      UserId: req.user.id,
-      tag: req.body.tag
-    }).then(() => {
-      res.redirect('back');
-    })
-      .catch(err => {
-        res.status(401).json(err);
-      });
-
-      
     let errors = [];
 
     if (!req.body.title) {
@@ -101,14 +88,14 @@ module.exports = function (app) {
       db.Project.create({
         title: req.body.title,
         description: req.body.description,
-        UserId: req.user.id
+        UserId: req.user.id,
+        tag: req.body.tag
+      }).then(() => {
+        res.redirect('back');
       })
-        .then(() => {
-          res.redirect('back');
-        })
         .catch(err => {
           res.status(401).json(err);
-        });
+      });  
     }
   })
 
