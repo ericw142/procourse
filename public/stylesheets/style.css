@@ -13,7 +13,6 @@ h2{
 }
 
 
-
 /* CARDS */
 .card {
   background-color: #fcfffa;
@@ -34,6 +33,19 @@ h2{
   border: 1px solid #383838;
 }
 
+/* UPDATE */
+#updForm, #update, #updId{
+  text-align: center;
+  color: #aaa;
+}
+
+#update{
+  font-size: 25px;
+}
+
+#updateBtn{
+  color: #051937;
+}
 
 
 /* MODAL */

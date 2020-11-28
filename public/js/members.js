@@ -100,6 +100,7 @@ $(document).ready(() => {
     })
 
   });
+  
 
   //  delete projects
   $(".del").on('click', function() {

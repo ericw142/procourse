@@ -1,0 +1,22 @@
+ {{>navbar}}
+
+
+
+<h1 id="update">Editing Your Project: </h1>
+<p id="updId"> <strong> {{project.title}} </strong> <br>
+ ID#: {{project.id}} </p>
+
+<form id="updForm" data-id={{project.id}}>
+    <label for="title">Title:</label><br>
+    <textarea id="title" name="title">{{project.title}}</textarea>
+    <br>
+    <label type="hidden" for="description">Description:</label><br>
+    <textarea id="description" name="description" cols="30" rows="10">{{project.description}}</textarea>
+    <br>
+    <button id="updateBtn" type="submit">Update</button>
+</form>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/js/update.js"></script>

@@ -1,12 +1,6 @@
- <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-    </div>
-  </div>
-</nav>
+  {{>navbar}}
+
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -59,7 +53,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
                     <p class="card-text">{{description}}</p>
                     <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
                     <div class="del" id="deleteProject"  data-value={{id}}>
                      <button class="btn btn-primary">delete</button>
                     </div>
