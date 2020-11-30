@@ -9,15 +9,17 @@
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container-lg">
     <div class="row">
-  
-      <div class="col-md-6">
-        <!-- Create Project -->
-        <div class="row">
-          <div class="col">
+      <div class="col-md-8">
+        <div class="card-colums">
+            <!-- Create Project -->
+            <div >
               <!-- Trigger/Open The Modal -->
-              <button id="myBtn">Create Project</button>
+
+              <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
+            </div>
+
               <!-- The Modal -->
               <div id="myModal" class="modal">
                 <!-- Modal content -->
@@ -26,54 +28,47 @@
 
                   <!-- Create a Project form -->
                   <form action="/api/create_project" method="POST" id="create-form">
-                    <h3>Create a Project</h3>
-  
-                    <input type="text" name="title" placeholder="project title">
-  
-                    <label for="description">Description</label>
-                    <textarea name="description" id="" cols="30" rows="10"></textarea>
-
-                    <label for="tag">Add Tags</label>
-                    <input type="text" name="tag" placeholder="seperate tags by comma">
-
-                    <input type="submit">
+                      <div class="form-group">
+                        <label for="create-project">Create New Project</label>
+                        <input type="text" name="title" class="form-control form-control-sm" placeholder="project title" placeholder="Title">
+                      </div>
+                      <div class="form-group">
+                          <label for="project-description">Description</label>
+                          <textarea name="description"class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="tag">Add Tags</label>
+                          <input type="text" name="tag" placeholder="seperate tags by comma">
+                      </div>
+                      <input type="submit">
                   </form>
                 </div>
               </div>
-            </div>
-        </div>
-  
-          <!-- Cards -->
-          <div class="row">
-            <div class="col">
+             <!-- Cards -->
               {{#each project}}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                      <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
-                      <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
-                      <p class="card-text">{{description}}</p>
-                      {{!-- Collab Section --}}
+
+                    <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
+                    <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
+                    <p class="card-text">{{description}}</p>
+                    {{!-- Collab Section --}}
                       <a class="viewCollab" data-value="{{id}}">View Collaborators</a>
                       <div class="collabSection{{id}}">
                         
                       </div>
+                    <a href="#" class="card-link">Created By</a>
+                    <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
+                     <button class="del btn btn-primary" id="deleteProject" data-value={{id}}>delete</button>
 
-                      <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
-                      <div class="del" id="deleteProject"  data-value={{id}}>
-                        <button class="btn btn-primary">delete</button>
-                      </div>
                     </div>
                 </div>
               
               {{/each}}
-            </div>
-          </div>
-
+        </div>
       </div>
-
-
       <!-- Search Section -->
-      <div class="col-md-6">
+      <div class="col-md-4">
 
         <form class="search-form">
 
@@ -98,4 +93,6 @@
   </div>
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/members.js"></script>
+
+  <script type="text/javascript" src="js/members.js"></script>
+
