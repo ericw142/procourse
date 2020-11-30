@@ -112,6 +112,22 @@ module.exports = function (app) {
     
   })
 
+  // Show Collaborators
+  app.get("/viewcollab/:id", (req, res) => {
+    let collabId = req.params.id;
+    db.Collaborator.findAll({
+      where: {
+        ProjectId: collabId,
+        approved: true
+      }
+    }).then((collab) => {
+      return res.json(collab);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    })
+  })
+
   // Project Search
 
   app.get("/api/titlesearch/:term", (req, res) => {

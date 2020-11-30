@@ -49,16 +49,22 @@
               {{#each project}}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                    <h5 class="card-title">{{title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
-                    <p class="card-text">{{description}}</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
-                    <div class="del" id="deleteProject"  data-value={{id}}>
-                     <button class="btn btn-primary">delete</button>
-                    </div>
+                      <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
+                      <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
+                      <p class="card-text">{{description}}</p>
+                      {{!-- Collab Section --}}
+                      <a class="viewCollab" data-value="{{id}}">View Collaborators</a>
+                      <div class="collabSection{{id}}">
+                        
+                      </div>
+
+                      <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
+                      <div class="del" id="deleteProject"  data-value={{id}}>
+                        <button class="btn btn-primary">delete</button>
+                      </div>
                     </div>
                 </div>
+              
               {{/each}}
             </div>
           </div>
@@ -92,4 +98,4 @@
   </div>
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/members.js"></script>
+<script type="text/javascript" src="js/members.js"></script>
