@@ -11,6 +11,7 @@ body{
 h2{
   color: aliceblue;
 }
+
 #myBtn{
   float: left;
 }
@@ -23,7 +24,10 @@ h2{
   color: #fefefe !important;
   font-family: 'Kaushan Script', cursive;
 }
-/* CARDS */
+
+
+
+/* Cards */
 .card {
   background-color: #fcfffa;
   margin: 5px;
@@ -36,7 +40,7 @@ h2{
   color: #383838;
 }
 
-/* SEARCH RESULTS */
+/* Search Results */
 .searchContent {
   background-color: #fcfffa;
   color: #383838;
@@ -46,7 +50,7 @@ h2{
   border: 1px solid #383838;
 }
 
-/* UPDATE */
+/* Update */
 #updForm, #update, #updId{
   text-align: center;
   color: #aaa;
@@ -60,13 +64,22 @@ h2{
   color: #051937;
 }
 
+/* Project Details */
+.detailsHeader {
+  color: #fcfffa;
+}
 
-/* MODAL */
-/* The Modal (background) */
+#detailsDiv {
+  color: #383838;
+  background-color: #fcfffa;
+}
+
+
+/* Modal */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
   width: 50%; /* Full width */
@@ -74,15 +87,16 @@ h2{
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%; 
 }
 
 /* The Close Button */

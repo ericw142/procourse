@@ -99,6 +99,34 @@ module.exports = function (app) {
     }
   })
 
+  // Project Details Page
+  app.get("/projectdetails/:id", (req, res) => {
+    let projectID = req.params.id;
+      db.Project.findOne({
+        where: {
+          id: projectID
+        }
+      }).then((project) => {
+        res.render("project", { project });
+      })
+    
+  })
+
+  // Show Collaborators
+  app.get("/viewcollab/:id", (req, res) => {
+    let collabId = req.params.id;
+    db.Collaborator.findAll({
+      where: {
+        ProjectId: collabId,
+        approved: true
+      }
+    }).then((collab) => {
+      return res.json(collab);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    })
+  })
 
   // Project Search
 
