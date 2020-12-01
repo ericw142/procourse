@@ -12,7 +12,10 @@ $(document).ready(() => {
       modal.style.display = "none";
     }
   }
-
+  $.get("/api/user_data").then(data => {
+    
+    $(".userid").text(`${data.firstname}  ${data.lastname}`);
+  });
 
     // View Collaborators
 $(".viewCollab").on("click", function(event) {

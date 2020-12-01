@@ -1,10 +1,12 @@
   {{>navbar}}
 
 
-  <div class="container">
+  <div class="container-lg">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-8 col-md-offset-3">
         <h2>Welcome <span class="member-name"></span></h2>
+        <!-- Trigger/Open The Modal -->
+          <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
       </div>
     </div>
   </div>
@@ -12,8 +14,7 @@
   <div class="container-lg">
     <div class="row">
       <div class="col-md-8">
-        <!-- Trigger/Open The Modal -->
-          <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
+        
         <div class="card-colums">
             <!-- Create Project -->
               <!-- The Modal -->
@@ -33,7 +34,7 @@
                           <textarea name="description"class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
                       </div>
                       <div class="form-group">
-                          <label for="tag">Add Tags</label>
+                          <label for="tag">Add Languages</label>
                           <input type="text" name="tag" placeholder="seperate tags by comma">
                       </div>
                       <input type="submit">
@@ -41,16 +42,17 @@
                 </div>
               </div>
              <!-- Cards -->
-             <div class="column">
+             <div class="column" id="project-container">
               {{#each project}}
-                <div class="card" style="width: 18rem;">
+                <div class="card ">
+                  <div class="card inside">
                     <div class="card-body">
 
-                    <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
-                    <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
+                    <h2><a class="card-title title" href="/projectdetails/{{id}}">{{title}}</a></h2><hr>
+                    <h6 class="card-subtitle mb-2 text-muted desc">Project Description</h6>
                     <p class="card-text">{{description}}</p>
                     {{!-- Collab Section --}}
-                      <a class="viewCollab" data-value="{{id}}">View Collaborators</a>
+                      <a type="button" class="viewCollab" data-value="{{id}}">View Collaborators</a>
                       <div class="collabSection{{id}}">
                         
                       </div>
@@ -59,6 +61,7 @@
                      <button class="del btn btn-primary" id="deleteProject" data-value={{id}}>delete</button>
 
                     </div>
+                  </div>
                 </div>
               
               {{/each}}

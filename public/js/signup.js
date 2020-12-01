@@ -3,7 +3,7 @@ $(document).ready(() => {
   const signUpForm = $("form.signup");
   const fNameInput = $("input#firstname-input");
   const lNameInput = $("input#lastname-input");
-  const usernameInput = $("input#username-input");
+  const githubInput = $("input#github-input");
   const emailInput = $("input#email-input");
   const passwordInput = $("input#password-input");
 
@@ -13,31 +13,31 @@ $(document).ready(() => {
     const userData = {
       firstName: fNameInput.val().trim(),
       lastName: lNameInput.val().trim(),
-      userName: usernameInput.val().trim(),
+      github: githubInput.val().trim(),
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
 
-    if (!userData.email || !userData.password || !userData.email || !userData.firstName || !userData.lastName || !userData.userName) {
+    if (!userData.email || !userData.password || !userData.email || !userData.firstName || !userData.lastName || !userData.github) {
       handleLoginErr();
       return;
     }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.firstName, userData.lastName, userData.userName, userData.email, userData.password);
+    signUpUser(userData.firstName, userData.lastName, userData.github, userData.email, userData.password);
     fNameInput.val("");
     lNameInput.val("");
-    usernameInput.val("");
+    githubInput.val("");
     emailInput.val("");
     passwordInput.val("");
   });
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser( firstName, lastName, userName, email, password) {
+  function signUpUser( firstName, lastName, github, email, password) {
     $.post("/api/signup", {
       firstName: firstName,
       lastName: lastName,
-      userName: userName,
+      github: github,
       email: email,
       password: password,
     })

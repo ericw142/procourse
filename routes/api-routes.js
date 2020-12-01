@@ -17,7 +17,7 @@ module.exports = function (app) {
     let userData = {
       firstname: req.user.dataValues.firstname,
       lastname: req.user.dataValues.lastname,
-      username: req.user.dataValues.username,
+      github: req.user.dataValues.github,
       email: req.user.email,
       id: req.user.id
     }
@@ -31,7 +31,7 @@ module.exports = function (app) {
     db.User.create({
       firstname: req.body.firstName,
       lastname: req.body.lastName,
-      username: req.body.userName,
+      github: req.body.github,
       email: req.body.email,
       password: req.body.password
     })
@@ -60,7 +60,7 @@ module.exports = function (app) {
       res.json({
         firstname: req.user.firstname,
         lastname: req.user.lastname,
-        username: req.user.username,
+        github: req.user.github,
         email: req.user.email,
         id: req.user.id
       });
@@ -197,7 +197,7 @@ module.exports = function (app) {
       }
     })
       .then((dbProjects) => {
-        res.reload(dbProjects);
+        location.reload();
       })
       .catch(err => {
         res.status(401).json(err);
