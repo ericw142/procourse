@@ -128,6 +128,23 @@ module.exports = function (app) {
     })
   })
 
+  // Request to Collaborate
+  app.post("/api/newcollab", (req, res) => {
+    db.Collaborator.create({
+      requesterId: req.body.requesterId,
+      requesterUsername: req.body.requesterUsername,
+      requesterEmail: req.body.requesterEmail,
+      requesterMessage: req.body.requesterMessage,
+      approved: false,
+      ProjectId: req.body.ProjectId
+    }).then(() => {
+      res.redirect('back');
+    })
+      .catch(err => {
+        res.status(401).json(err);
+    });  
+  })
+
   // Project Search
 
   app.get("/api/titlesearch/:term", (req, res) => {
