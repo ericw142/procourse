@@ -132,4 +132,49 @@ $("#showReq").on("click", function(event) {
     
   })
 
+// ViewRequest-----------
+$("#showReq").on("click", function(event) {
+  event.preventDefault();
+  // Selecting id and corresponding div
+  let id = $(this).data("value");
+  let jquerySelector = ".requestSection"+id;
+  console.log(id);
+
+  $.ajax({
+    url: "/viewRequests/"+id,
+    method: "GET"
+  }).then(function(response) {
+    $(jquerySelector).empty();
+
+    console.log(response);
+
+    for (var i = 0; i < response.length; i++) {
+      let collabName = $("<p>");
+      collabName.text(response[i].requesterUsername);
+      $(jquerySelector).append(collabName);
+      let message = $("<p>");
+      message.text(response[i].requesterMessage);
+      $(jquerySelector).append(message);
+      // Approve Button
+      let approveBtn = $("<button data-requestvalue=" + response[i].id + ">");
+      approveBtn.addClass("approveButton");
+      approveBtn.text("approve");
+      $(jquerySelector).append(approveBtn);
+    }
+
+    $(".approveButton").on("click", function(event){
+      event.preventDefault();
+
+      let requestId = $(this).data("requestvalue");
+      console.log(requestId);
+      $.ajax({
+        url: "api/approveRequest/" + requestId,
+        method: "PUT"
+      }).then(()=>{
+        alert("Youve Approved!");
+      })
+    })
+  })
+})
+
 })

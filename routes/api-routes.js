@@ -169,24 +169,38 @@ module.exports = function (app) {
         res.status(401).json(err);
     });  
   })
-
-  //-------------APPROVE--BUTTON---------------------
-  app.put("api/approveRequest/:id", (req, res) => {
-    console.log(requestId);
-   db.Collaborator.update(
-     {
-    approved: true
-
-   },
-   {
-     where: {
-       id: req.params.id
-     }
-   }
-   ).then(() => {
-     location.reload();
-   })
+  // View Requests
+  app.get("/viewRequests/:id", (req, res) => {
+    let collabId = req.params.id;
+    db.Collaborator.findAll({
+      where: {
+        ProjectId: collabId,
+        approved: false
+      }
+    }).then((collab) => {
+      return res.json(collab);
+    })
+    .catch(err => {
+      res.status(401).json(err);
+    })
   })
+    //-------------APPROVE--BUTTON---------------------
+    app.put("/projectdetails/api/approveRequest/:id", (req, res) => {
+    let urlId = req.params.id;
+     db.Collaborator.update(
+       {
+      approved: true
+  
+     },
+     {
+       where: {
+         id: urlId
+       }
+     }
+     ).then((result) => {
+       return res.json(result);
+     })
+    })
 
 
   // Project Search
