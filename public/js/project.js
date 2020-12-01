@@ -86,5 +86,4 @@ $(".viewCollab").on("click", function(event) {
     
   })
 
-
 })
