@@ -38,51 +38,6 @@ $(".viewCollab").on("click", function(event) {
     })
   })
 
-  //-----------------APPROVE----BUTTON-----------
-       // ViewRequest-----------
-$("#showReq").on("click", function(event) {
-  event.preventDefault();
-  // Selecting id and corresponding div
-  let id = $(this).data("value");
-  let jquerySelector = ".requestSection"+id;
-  console.log(id);
-
-  $.ajax({
-    url: "/viewRequests/"+id,
-    method: "GET"
-  }).then(function(response) {
-    $(jquerySelector).empty();
-
-    console.log(response);
-
-    for (var i = 0; i < response.length; i++) {
-      let collabName = $("<p>");
-      collabName.text(response[i].requesterUsername);
-      $(jquerySelector).append(collabName);
-      let message = $("<p>");
-      message.text(response[i].requesterMessage);
-      $(jquerySelector).append(message);
-      let approveBtn = $("<button data-value=" + response[i].id + ">");
-      approveBtn.addClass("approveButton");
-      approveBtn.text("approve");
-      // approveBtn.data("value", response[i].id);
-      $(jquerySelector).append(approveBtn);
-    }
-
-    $(".approveButton").on("click", function(event){
-      event.preventDefault();
-      
-      let requestId = $(this).data("value");
-    
-      $.ajax({
-        url: "api/approveRequest/" + requestId,
-        method: "PUT"
-      }).then(()=>{
-        alert("Youve Approved!");
-      })
-    })
-  })
-})
 
   // Request to Join
   $(btn).on("click", function(event) {
@@ -159,7 +114,10 @@ $("#showReq").on("click", function(event) {
       let approveBtn = $("<button data-requestvalue=" + response[i].id + ">");
       approveBtn.addClass("approveButton");
       approveBtn.text("approve");
-      $(jquerySelector).append(approveBtn);
+      let denyBtn = $("<button data-value=" + response[i].id + ">");
+      denyBtn.addClass("denyButton");
+      denyBtn.text("deny");
+      $(jquerySelector).append(approveBtn, denyBtn);
     }
 
     $(".approveButton").on("click", function(event){
@@ -171,7 +129,22 @@ $("#showReq").on("click", function(event) {
         url: "api/approveRequest/" + requestId,
         method: "PUT"
       }).then(()=>{
-        alert("Youve Approved!");
+        alert("Approved!");
+        location.reload();
+      })
+    })
+
+    $(".denyButton").on("click", function(event){
+      event.preventDefault();
+      
+      let requestId = $(this).data("value");
+      console.log(requestId);
+      $.ajax({
+        url: "api/denyRequest/" + requestId,
+        method: "DELETE"
+      }).then(()=>{
+        alert("Not Approved!");
+        location.reload();
       })
     })
   })

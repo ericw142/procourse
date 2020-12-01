@@ -202,6 +202,19 @@ module.exports = function (app) {
      })
     })
 
+    //----------------deny---button-----------------------
+    app.delete("/projectdetails/api/denyRequest/:id", (req, res) => {
+      let id = req.params.id;
+       db.Collaborator.destroy(
+       {
+         where: {
+           id: id
+         }
+       }
+       ).then((result) => {
+         return res.json(result);
+       })
+      })
 
   // Project Search
 
