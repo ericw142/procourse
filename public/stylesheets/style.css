@@ -11,6 +11,10 @@ body{
 h2{
   color: aliceblue;
 }
+.project{
+  padding: 10px;
+  margin: 10px;
+}
 
 #myBtn{
   float: left;

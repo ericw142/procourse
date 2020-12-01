@@ -1,12 +1,12 @@
  {{>navbar}}
 
+<div class="container-lg">
+    <div class="row">
+    <div class="col-sm-8">
+          <h1 class="detailsHeader"> <strong> {{project.title}} </strong> <br>
+        ID#: {{project.id}} </h1>
 
-
-<h1 class="detailsHeader">Project Details</h1>
-<p class="detailsHeader"> <strong> {{project.title}} </strong> <br>
- ID#: {{project.id}} </p>
-
-<div id="detailsDiv">
+   <div id="detailsDiv">
     <h3>Title</h3>
     <p>{{project.title}}</p>
     <br>
@@ -14,7 +14,7 @@
     <p>{{project.description}}</p>
     <br>
 
-    <a class="viewCollab" data-value="{{project.id}}">View Collaborators</a>
+    <a  type="button" class="viewCollab" data-value="{{project.id}}">View Collaborators</a>
     <div class="collabSection{{project.id}}">
                         
     </div>
@@ -22,6 +22,17 @@
     <button id="requestBtn">Request to Join</button>
     
 </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="project-owner">
+            <img src="./images/del.png" alt="profile avatar">
+        </div>
+        
+    </div>
+  </div>
+  
+</div>
+
 
 
 

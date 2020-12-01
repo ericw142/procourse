@@ -12,14 +12,10 @@
   <div class="container-lg">
     <div class="row">
       <div class="col-md-8">
+        <!-- Trigger/Open The Modal -->
+          <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
         <div class="card-colums">
             <!-- Create Project -->
-            <div >
-              <!-- Trigger/Open The Modal -->
-
-              <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
-            </div>
-
               <!-- The Modal -->
               <div id="myModal" class="modal">
                 <!-- Modal content -->
@@ -45,6 +41,7 @@
                 </div>
               </div>
              <!-- Cards -->
+             <div class="column">
               {{#each project}}
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -65,6 +62,7 @@
                 </div>
               
               {{/each}}
+            </div>
         </div>
       </div>
       <!-- Search Section -->
