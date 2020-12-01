@@ -20,14 +20,17 @@
     </div>
     
     <button id="requestBtn" data-value={{project.id}} data-toggle="modal" data-target="#myModal">Request to Join</button>
+    <button id="showReq" data-value={{project.id}} >View Requests</button>
+    <div class="requestSection{{project.id}}">
 
+    </div>
     <!-- The Modal -->
         <div id="myModal" class="modal">
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
 
-            <!-- Create a Project form -->
+            <!-- Request Form -->
             <form id="collab-form">
                 <div class="form-group">
                   <label for="create-project">Request to Collaborate</label>
