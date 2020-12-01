@@ -5,6 +5,9 @@ const Sequelize = require('sequelize');
 const { create } = require("express-handlebars");
 const Op = Sequelize.Op;
 
+// Nodemailer
+const nodemailer = require("nodemailer");
+
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
@@ -130,6 +133,28 @@ module.exports = function (app) {
 
   // Request to Collaborate
   app.post("/api/newcollab", (req, res) => {
+    async function sendMail() {
+      let testAccount = await nodemailer.createTestAccount();
+
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "procourse48@gmail.com",
+          pass: "jH^Vx660nZcI"
+        },
+      });
+
+      let info = await transporter.sendMail({
+        from: 'procourse48@gmail.com',
+        to: req.body.requesterEmail,
+        subject: "You sent a request on Procourse!",
+        text: "You have successfully sent a collaborate request!",
+        html: "<b>You have successfully sent a collaborate request!</b><p>The owner of the project may contact you with questions. Thank you for using Procourse!</p>",
+      });
+    }
+
+    sendMail().catch(console.error);
+
     db.Collaborator.create({
       requesterId: req.body.requesterId,
       requesterUsername: req.body.requesterUsername,
@@ -144,6 +169,25 @@ module.exports = function (app) {
         res.status(401).json(err);
     });  
   })
+
+  //-------------APPROVE--BUTTON---------------------
+  app.put("api/approveRequest/:id", (req, res) => {
+    console.log(requestId);
+   db.Collaborator.update(
+     {
+    approved: true
+
+   },
+   {
+     where: {
+       id: req.params.id
+     }
+   }
+   ).then(() => {
+     location.reload();
+   })
+  })
+
 
   // Project Search
 
