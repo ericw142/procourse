@@ -6,7 +6,7 @@ $(document).ready(() => {
     $(".member-name").text(`${data.firstname}  ${data.lastname}`);
   });
 
-  // MODAL
+  // Modal
     const modal = document.getElementById("myModal");
     const btn = document.getElementById("myBtn");
     const span = document.getElementsByClassName("close")[0];
@@ -27,7 +27,30 @@ $(document).ready(() => {
     }
   
 
-  // SEARCH FORM
+    // View Collaborators
+    $(".viewCollab").on("click", function(event) {
+      event.preventDefault();
+      // Selecting id and corresponding div
+      let id = $(this).data("value");
+      let jquerySelector = ".collabSection"+id;
+
+      $.ajax({
+        url: "/viewcollab/"+id,
+        method: "GET"
+      }).then(function(response) {
+        $(jquerySelector).empty();
+
+        console.log(response);
+
+        for (var i = 0; i < response.length; i++) {
+          let collabName = $("<p>");
+          collabName.text(response[i].requesterUsername);
+          $(jquerySelector).append(collabName);
+        }
+      })
+    })
+
+  // Search Form
 
   $(".search-form").on("submit", function(event) {
     event.preventDefault();
@@ -38,7 +61,6 @@ $(document).ready(() => {
 
     let queryUrl;
 
-    // TODO -- CREATE IF STATEMENT TO CHECK DIFFERENT TYPES OF SEARCHES AND CREATE AJAX QUERYURL
     if (filter === 'title') {
       queryUrl = "/api/titlesearch/"+term;
     } else if (filter === 'user') {
@@ -53,16 +75,20 @@ $(document).ready(() => {
       url: queryUrl,
       method: "GET"
     }).then(function(response) {
+
       $(".searchContent").empty();
       
       if (filter === 'title') {
+        console.log(response);
           // Creating Search Results from Title
           for (var i = 0; i < response.length; i++) {
 
             let searchCard = $("<div>");
 
-            let searchTitle = $("<p>");
+            let searchTitle = $("<a>");
             searchTitle.text(response[i].title);
+            searchTitle.data("id", response[i].id);
+            searchTitle.attr("href", "/projectdetails/"+response[i].id);
             searchCard.append(searchTitle);
 
             let searchDesc = $("<p>");
@@ -82,8 +108,10 @@ $(document).ready(() => {
             let searchCard = $("<div>");
             searchCard.addClass('searchCard')
 
-            let searchTitle = $("<p>");
+            let searchTitle = $("<a>");
             searchTitle.text(response[i].Projects[x].title);
+            searchTitle.data("id", response[i].id);
+            searchTitle.attr("href", "/projectdetails/"+response[i].id);
             searchCard.append(searchTitle);
 
             let searchDesc = $("<p>");
@@ -102,7 +130,7 @@ $(document).ready(() => {
   });
   
 
-  //  delete projects
+  //  Delete Projects
   $(".del").on('click', function() {
      let id = $(this).data('value');
      console.log(id);
