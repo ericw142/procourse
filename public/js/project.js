@@ -1,4 +1,19 @@
 $(document).ready(() => {
+  // Modal
+  const modal = document.getElementById("myModal");
+  const btn = document.getElementById("requestBtn");
+  const span = document.getElementsByClassName("close")[0];
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
     // View Collaborators
 $(".viewCollab").on("click", function(event) {
     event.preventDefault();
@@ -22,4 +37,54 @@ $(".viewCollab").on("click", function(event) {
       }
     })
   })
+
+  // Request to Join
+  $(btn).on("click", function(event) {
+    event.preventDefault();
+
+    let projectId = $(this).data("value");
+
+    // If current user is owner of project, display message
+    $.ajax({
+      url: "/api/user_data",
+      method: "GET"
+    }).then(function(response) {
+      // Store requester's info for later
+      let requesterId = response.id;
+      let requesterUsername = response.username;
+      let requesterEmail = response.email;
+
+      if (requesterId === projectId) {
+        alert("You are the owner of this project");
+      } else {
+        // Else, display modal form for request to join the project
+        
+          modal.style.display = "block";
+
+          $("#collab-form").on("submit", function(event) {
+            event.preventDefault();
+
+            let message = $("input[name='message']").val()
+            console.log(message);
+
+            $.ajax({
+              method: "POST",
+              url: "/api/newcollab",
+              data: {
+                requesterId: requesterId,
+                requesterUsername: requesterUsername,
+                requesterEmail: requesterEmail,
+                requesterMessage: message,
+                ProjectId: projectId
+              }
+            }).then((response) => {
+              alert("Successfully created request");
+            })
+          })
+      }
+    })
+    
+  })
+
+
 })
