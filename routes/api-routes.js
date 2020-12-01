@@ -145,6 +145,25 @@ module.exports = function (app) {
     });  
   })
 
+  //-------------APPROVE--BUTTON---------------------
+  app.put("api/approveRequest/:id", (req, res) => {
+    console.log(requestId);
+   db.Collaborator.update(
+     {
+    approved: true
+
+   },
+   {
+     where: {
+       id: req.params.id
+     }
+   }
+   ).then(() => {
+     location.reload();
+   })
+  })
+
+
   // Project Search
 
   app.get("/api/titlesearch/:term", (req, res) => {
