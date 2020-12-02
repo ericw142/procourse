@@ -25,11 +25,11 @@ var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({
   defaultLayout: "main",
-    runtimeOptions: {
-      allowProtoPropertiesByDefault: true,
-      allowProtoMethodsByDefault: true,
-    },
-  })
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+})
 );
 
 app.set("view engine", "handlebars");

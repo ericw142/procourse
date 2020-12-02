@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     })
 
-    Collaborator.associate = function(models) {
+    Collaborator.associate = function (models) {
         Collaborator.belongsTo(models.Project, {
             foreignKey: {
                 allowNull: false
