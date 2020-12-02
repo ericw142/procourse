@@ -13,7 +13,7 @@ $(document).ready(() => {
     }
   }
 
-  let iD = $(this).data("value");
+  let iD = $(".viewCollab").data("value");
   let jquerySelect = ".collabSection"+iD;
   console.log(iD);
 
