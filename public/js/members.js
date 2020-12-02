@@ -141,7 +141,7 @@ $(document).ready(() => {
       url: "/api/delete_project/"  + id
     })
     .then(() =>{
-      alert('project deleted');
+      window.location.assign('/members');
     })
     .catch(err => {
       console.log(err);

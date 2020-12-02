@@ -1,4 +1,3 @@
-// Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
 const Sequelize = require('sequelize');
@@ -8,15 +7,11 @@ const Op = Sequelize.Op;
 // Nodemailer
 const nodemailer = require("nodemailer");
 
+// Passport Authentication
 module.exports = function (app) {
-  // Using the passport.authenticate middleware with our local strategy.
-  // If the user has valid login credentials, send them to the members page.
-  // Otherwise the user will be sent an error
+  // Route for logging in
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
-    // Sending back a password, even a hashed password, isn't a good idea
-    // console.log('.................................................')
-    // console.log(req);
-    // console.log(req.user.dataValues);
+
     let userData = {
       firstname: req.user.dataValues.firstname,
       lastname: req.user.dataValues.lastname,
@@ -26,10 +21,7 @@ module.exports = function (app) {
     }
     res.json(userData);
   });
-
-  // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
-  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
-  // otherwise send back an error
+  // Route for signing up
   app.post("/api/signup", (req, res) => {
     db.User.create({
       firstname: req.body.firstName,
@@ -71,7 +63,7 @@ module.exports = function (app) {
   });
 
 
-
+  // HOMEPAGE ROUTES
   // Create Project Form
   app.post("/api/create_project", (req, res) => {
 
@@ -98,21 +90,120 @@ module.exports = function (app) {
       })
         .catch(err => {
           res.status(401).json(err);
-      });  
+        });
     }
   })
 
-  // Project Details Page
+  // Project Search
+  // Route to search by title
+  app.get("/api/titlesearch/:term", (req, res) => {
+    let term = req.params.term;
+
+    db.Project.findAll({
+      where: {
+        title: { [Op.like]: '%' + term + '%' }
+      }
+    })
+      .then((searchResults) => {
+        return res.json(searchResults);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
+
+  })
+  // Route to search by username
+  app.get("/api/usersearch/:term", (req, res) => {
+    let term = req.params.term;
+
+    db.User.findAll({
+      where: {
+        [Op.or]: [
+          { firstName: { [Op.like]: '%' + term + '%' } },
+          { lastName: { [Op.like]: '%' + term + '%' } },
+          { username: { [Op.like]: '%' + term + '%' } },
+          { email: { [Op.like]: '%' + term + '%' } }
+        ]
+      },
+      include: [db.Project]
+    })
+      .then((searchResults) => {
+        return res.json(searchResults);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
+
+  })
+
+
+  // Delete project
+  app.delete("/api/delete_project/:id", (req, res) => {
+    let a = req.params.id;
+    db.Project.destroy({
+      where: {
+        id: a
+      }
+    })
+      .then((result) => {
+        return res.json(result);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      });
+
+  })
+
+  // Update Project Page
+  app.get("/api/update/:id", (req, res) => {
+    db.Project.findOne({
+      where: {
+        id: req.params.id
+      },
+
+    })
+      .then((project) => {
+        res.render("update", { project });
+        console.log(project);
+      })
+      .catch(err => {
+        res.status(401).json(err);
+      })
+
+  });
+
+  // Route to complete the update
+  app.put("/api/update", function (req, res) {
+    console.log(req.body);
+    db.Project.update(
+
+      {
+        title: req.body.title,
+        description: req.body.description
+      },
+      {
+        where: {
+          id: req.body.id
+        }
+
+      }
+    ).then(result => {
+      res.render("update", result)
+    })
+  });
+
+  // PROJECT DETAILS PAGE
+  // Route to get project info
   app.get("/projectdetails/:id", (req, res) => {
     let projectID = req.params.id;
-      db.Project.findOne({
-        where: {
-          id: projectID
-        }
-      }).then((project) => {
-        res.render("project", { project });
-      })
-    
+    db.Project.findOne({
+      where: {
+        id: projectID
+      }
+    }).then((project) => {
+      res.render("project", { project });
+    })
+
   })
 
   // Show Collaborators
@@ -126,9 +217,9 @@ module.exports = function (app) {
     }).then((collab) => {
       return res.json(collab);
     })
-    .catch(err => {
-      res.status(401).json(err);
-    })
+      .catch(err => {
+        res.status(401).json(err);
+      })
   })
 
   // Request to Collaborate
@@ -167,7 +258,7 @@ module.exports = function (app) {
     })
       .catch(err => {
         res.status(401).json(err);
-    });  
+      });
   })
   // View Requests
   app.get("/viewRequests/:id", (req, res) => {
@@ -180,138 +271,44 @@ module.exports = function (app) {
     }).then((collab) => {
       return res.json(collab);
     })
-    .catch(err => {
-      res.status(401).json(err);
-    })
+      .catch(err => {
+        res.status(401).json(err);
+      })
   })
-    //-------------APPROVE--BUTTON---------------------
-    app.put("/projectdetails/api/approveRequest/:id", (req, res) => {
+  //Approve Button
+  app.put("/projectdetails/api/approveRequest/:id", (req, res) => {
     let urlId = req.params.id;
-     db.Collaborator.update(
-       {
-      approved: true
-  
-     },
-     {
-       where: {
-         id: urlId
-       }
-     }
-     ).then((result) => {
-       return res.json(result);
-     })
-    })
-
-    //----------------deny---button-----------------------
-    app.delete("/projectdetails/api/denyRequest/:id", (req, res) => {
-      let id = req.params.id;
-       db.Collaborator.destroy(
-       {
-         where: {
-           id: id
-         }
-       }
-       ).then((result) => {
-         return res.json(result);
-       })
-      })
-
-  // Project Search
-
-  app.get("/api/titlesearch/:term", (req, res) => {
-    let term = req.params.term;
-
-    db.Project.findAll({
-      where: {
-        title: { [Op.like]: '%' + term + '%' }
-      }
-    })
-      .then((searchResults) => {
-        return res.json(searchResults);
-      })
-      .catch(err => {
-        res.status(401).json(err);
-      })
-
-  })
-
-  app.get("/api/usersearch/:term", (req, res) => {
-    let term = req.params.term;
-
-    db.User.findAll({
-      where: {
-        [Op.or]: [
-          { firstName: { [Op.like]: '%' + term + '%' } },
-          { lastName: { [Op.like]: '%' + term + '%' } },
-          { username: { [Op.like]: '%' + term + '%' } },
-          { email: { [Op.like]: '%' + term + '%' } }
-        ]
-      },
-      include: [db.Project]
-    })
-      .then((searchResults) => {
-        return res.json(searchResults);
-      })
-      .catch(err => {
-        res.status(401).json(err);
-      })
-
-  })
-
-
-  // delete project
-  app.delete("/api/delete_project/:id", (req, res) => {
-    let a = req.params.id;
-    db.Project.destroy({
-      where: {
-        id: a
-      }
-    })
-      .then((dbProjects) => {
-        res.reload(dbProjects);
-      })
-      .catch(err => {
-        res.status(401).json(err);
-      });
-
-  })
-
-  // --------Update------
-  app.get("/api/update/:id", (req, res) => {
-    db.Project.findOne({
-      where: {
-        id: req.params.id
-      },
-
-    })
-      .then((project) => {
-        res.render("update", { project });
-        console.log(project);
-      })
-      .catch(err => {
-        res.status(401).json(err);
-      })
-
-  });
-
-
-  app.put("/api/update", function (req, res) {
-    console.log(req.body);
-    db.Project.update(
-
+    db.Collaborator.update(
       {
-        title: req.body.title,
-        description: req.body.description
+        approved: true
+
       },
       {
         where: {
-          id: req.body.id
+          id: urlId
         }
-
       }
-    ).then(result => {
-      res.render("update", result)
+    ).then((result) => {
+      return res.json(result);
     })
-  });
+  })
+
+  //Deny Button
+  app.delete("/projectdetails/api/denyRequest/:id", (req, res) => {
+    let id = req.params.id;
+    db.Collaborator.destroy(
+      {
+        where: {
+          id: id
+        }
+      }
+    ).then((result) => {
+      return res.json(result);
+    })
+  })
+
+
+
+
 
 };

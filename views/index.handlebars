@@ -1,98 +1,97 @@
-  {{>navbar}}
+{{>navbar}}
 
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h2>Welcome <span class="member-name"></span></h2>
     </div>
   </div>
+</div>
 
-  <div class="container-lg">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="card-colums">
-            <!-- Create Project -->
-            <div >
-              <!-- Trigger/Open The Modal -->
+<div class="container-lg">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card-colums">
+        <!-- Create Project Modal-->
+        <div>
+          <!-- Trigger/Open The Modal -->
+          <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New
+            Project</button>
+        </div>
 
-              <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">Create New Project</button>
-            </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
 
-              <!-- The Modal -->
-              <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
-
-                  <!-- Create a Project form -->
-                  <form action="/api/create_project" method="POST" id="create-form">
-                      <div class="form-group">
-                        <label for="create-project">Create New Project</label>
-                        <input type="text" name="title" class="form-control form-control-sm" placeholder="project title" placeholder="Title">
-                      </div>
-                      <div class="form-group">
-                          <label for="project-description">Description</label>
-                          <textarea name="description"class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
-                      </div>
-                      <div class="form-group">
-                          <label for="tag">Add Tags</label>
-                          <input type="text" name="tag" placeholder="seperate tags by comma">
-                      </div>
-                      <input type="submit">
-                  </form>
-                </div>
+            <!-- Create Project form -->
+            <form action="/api/create_project" method="POST" id="create-form">
+              <div class="form-group">
+                <label for="create-project">Create New Project</label>
+                <input type="text" name="title" class="form-control form-control-sm" placeholder="project title"
+                  placeholder="Title">
               </div>
-             <!-- Cards -->
-              {{#each project}}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-
-                    <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
-                    <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
-                    <p class="card-text">{{description}}</p>
-                    {{!-- Collab Section --}}
-                      <a class="viewCollab" data-value="{{id}}">View Collaborators</a>
-                      <div class="collabSection{{id}}">
-                        
-                      </div>
-                    <a href="#" class="card-link">Created By</a>
-                    <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
-                     <button class="del btn btn-primary" id="deleteProject" data-value={{id}}>delete</button>
-
-                    </div>
-                </div>
-              
-              {{/each}}
+              <div class="form-group">
+                <label for="project-description">Description</label>
+                <textarea name="description" class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="tag">Add Tags</label>
+                <input type="text" name="tag" placeholder="seperate tags by comma">
+              </div>
+              <input type="submit">
+            </form>
+          </div>
         </div>
-      </div>
-      <!-- Search Section -->
-      <div class="col-md-4">
+        <!-- Project Cards -->
+        {{#each project}}
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
 
-        <form class="search-form">
+            <a class="card-title" href="/projectdetails/{{id}}">{{title}}</a>
+            <h6 class="card-subtitle mb-2 text-muted">Project Description</h6>
+            <p class="card-text">{{description}}</p>
+            {{!-- Collab Section --}}
+            <a class="viewCollab" data-value="{{id}}">View Collaborators</a>
+            <div class="collabSection{{id}}">
 
-          <input type="search" id="term" name="term" placeholder="search here">
+            </div>
+            <a href="#" class="card-link">Created By</a>
+            <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
+            <button class="del btn btn-primary" id="deleteProject" data-value={{id}}>delete</button>
 
-          <select name="searchType" id="searchType">
-            <option value="title">By Title</option>
-            <option value="user">By User</option>
-          </select>
-
-          <input type="submit" id="searchBtn" value="Search"></input>
-
-        </form>
-
-        <div class="searchContent">
-          
+          </div>
         </div>
-  
+
+        {{/each}}
       </div>
-  
     </div>
+    <!-- Search Section -->
+    <div class="col-md-4">
+
+      <form class="search-form">
+
+        <input type="search" id="term" name="term" placeholder="search here">
+
+        <select name="searchType" id="searchType">
+          <option value="title">By Title</option>
+          <option value="user">By User</option>
+        </select>
+
+        <input type="submit" id="searchBtn" value="Search"></input>
+
+      </form>
+
+      <div class="searchContent">
+
+      </div>
+
+    </div>
+
   </div>
-  
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script type="text/javascript" src="js/members.js"></script>
-
+<script type="text/javascript" src="js/members.js"></script>
