@@ -13,7 +13,7 @@ $(document).ready(() => {
     }
   }
 
-  let iD = $(this).data("value");
+  let iD = $(".viewCollab").data("value");
   let jquerySelect = ".collabSection"+iD;
   console.log(iD);
 
@@ -27,7 +27,7 @@ $(document).ready(() => {
     let collabLength = response.length;
     let numOfcollab = $("<p>");
     numOfcollab.text("This project has " + collabLength + " collaborators")
-    $(".detailsHeader").append(numOfcollab);
+    $("#detail").append(numOfcollab);
    
   })
 
@@ -121,7 +121,7 @@ $.ajax({
   let reqLength = res.length;
   let numOfReq = $("<p>");
   numOfReq.text("This project has " + reqLength + " requests to join")
-  $(".detailsHeader").append(numOfReq);
+  $("#detail").append(numOfReq);
 })
 
 
