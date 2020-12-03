@@ -44,14 +44,20 @@ $(document).ready(() => {
       method: "GET"
     }).then(function (response) {
       $(jquerySelector).empty();
-
       console.log(response.length, "resp");
+      if (response.length < 1) {
+        let noCollab = $("<p>");
+        noCollab.text("No collaborators");
+        $(jquerySelect).append(noCollab)
+      }
+      else {
 
-      for (var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
 
-        let collabName = $("<p>");
-        collabName.text(response[i].requesterUsername);
-        $(jquerySelector).append(collabName);
+          let collabName = $("<p>");
+          collabName.text(response[i].requesterUsername);
+          $(jquerySelector).append(collabName);
+        }
       }
     })
   })
@@ -99,7 +105,7 @@ $(document).ready(() => {
           }).then((response) => {
             alert("Successfully created request");
             modal.style.display = "none";
-            window.location.assign('/projectdetails/'+projectId);
+            window.location.assign('/projectdetails/' + projectId);
           })
         })
       }
