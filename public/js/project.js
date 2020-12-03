@@ -66,7 +66,7 @@ $(document).ready(() => {
   $(btn).on("click", function (event) {
     event.preventDefault();
 
-    let projectId = $(this).data("value");
+    let projectId = $(this).data("id");
 
     // If current user is owner of project, display message
     $.ajax({
