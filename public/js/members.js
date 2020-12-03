@@ -6,7 +6,9 @@ $(document).ready(() => {
     $(".member-name").text(`${data.firstname}  ${data.lastname}`);
     $('.github').text(`${data.username}`);
     $('.email').text(`${data.email}`);
-    let age = $('.age').text(`${data.age}`);
+    let age = `${data.age}`;
+    age = age.substring(0,10);
+    $('.age').text(age);
   });
 
   // Modal
