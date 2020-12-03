@@ -326,7 +326,19 @@ module.exports = function (app) {
   })
 
 
-
-
-
+  // View all Requests
+  app.get("/api/requestdisplay", (req, res) => {
+    db.User.findAll({
+      where: {
+        id: req.user.id
+      },
+      include: [{
+        model: db.Project,
+        required: true,
+        include: [{model: db.Collaborator, required: true}]
+      }]
+    }).then((result) => {
+      return res.json(result);
+    })
+  })
 };

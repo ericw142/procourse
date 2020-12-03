@@ -159,4 +159,43 @@ $(document).ready(() => {
       })
   })
 
+// Display number of outstanding requests
+  $.ajax({
+    url: "/api/requestdisplay",
+    method: "GET"
+  }).then((response) => {
+    console.log(response);
+    let requestNum = 0;
+    let projectArr = [];
+    let tracker = false;
+    // Filter through every collaborator on every project owned by the user
+    for (var i = 0; i < response[0].Projects.length; i++) {
+      for (var x = 0; x < response[0].Projects[i].Collaborators.length; x++) {
+        if (response[0].Projects[i].Collaborators[x].approved === false) {
+          // If there is an outstanding request, increase requestNum
+          requestNum++;
+          tracker = true;
+        }
+      }
+      // If a request was logged on the current project, add project title into array
+      if (tracker === true) {
+        projectArr.push(response[0].Projects[i].title);
+        tracker = false;
+      }
+    }
+    
+    if (requestNum > 0) {
+      $("#requestDisplay").text(requestNum + " pending requests");
+      for (var y = 0; y < projectArr.length; y++) {
+        // Displays the title of each project that has an outstanding request
+        let title = $("<p>");
+        title.text("On project titled: " + projectArr[y]);
+        $(".projectTracker").append(title);
+      }
+      
+    } else {
+      $("#requestDisplay").text("No pending requests");
+    }
+  })
+
 });

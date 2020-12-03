@@ -192,3 +192,9 @@ hr{
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Requests Display */
+
+#requestDisplay {
+  text-decoration: underline;
+}
