@@ -253,8 +253,8 @@ module.exports = function (app) {
       requesterMessage: req.body.requesterMessage,
       approved: false,
       ProjectId: req.body.ProjectId
-    }).then(() => {
-      res.redirect('back');
+    }).then((result) => {
+      return res.json(result);
     })
       .catch(err => {
         res.status(401).json(err);

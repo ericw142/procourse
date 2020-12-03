@@ -110,8 +110,8 @@ $(document).ready(() => {
 
             let searchTitle = $("<a>");
             searchTitle.text(response[i].Projects[x].title);
-            searchTitle.data("id", response[i].id);
-            searchTitle.attr("href", "/projectdetails/"+response[i].id);
+            searchTitle.data("id", response[i].Projects[x].id);
+            searchTitle.attr("href", "/projectdetails/"+response[i].Projects[x].id);
             searchCard.append(searchTitle);
 
             let searchDesc = $("<p>");
