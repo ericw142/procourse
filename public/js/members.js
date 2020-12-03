@@ -92,7 +92,7 @@ $(document).ready(() => {
         // Creating Search Results from Title
         for (var i = 0; i < response.length; i++) {
 
-          let searchCard = $("<div>");
+            let searchCard = $("<div class='card search'>");
 
           let searchTitle = $("<a>");
           searchTitle.text(response[i].title);
