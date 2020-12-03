@@ -55,7 +55,7 @@ $(document).ready(() => {
         for (var i = 0; i < response.length; i++) {
 
           let collabName = $("<p>");
-          collabName.text(response[i].requesterUsername);
+          collabName.text(" - " + response[i].requesterUsername);
           $(jquerySelector).append(collabName);
         }
       }
@@ -167,8 +167,15 @@ $(document).ready(() => {
 
           for (var i = 0; i < res.length; i++) {
             let collabName = $("<p>");
-            collabName.text(res[i].requesterUsername);
+            collabName.text("Username: " + res[i].requesterUsername);
+            
+            let collabEmail = $("<p>");
+            collabEmail.text("Email: " + res[i].requesterEmail);
+            collabName.addClass("underline");
+            collabEmail.addClass("underline")
+
             $(jquerySelector).append(collabName);
+            $(jquerySelector).append(collabEmail);
             let message = $("<p>");
             message.text(res[i].requesterMessage);
             $(jquerySelector).append(message);

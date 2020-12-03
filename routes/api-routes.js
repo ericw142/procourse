@@ -166,9 +166,9 @@ module.exports = function (app) {
       .then((result) => {
         return res.json(result);
       })
-      .catch(err => {
-        res.status(401).json(err);
-      });
+      // .catch(err => {
+      //   res.status(401).json(err);
+      // });
 
   })
 

@@ -195,6 +195,6 @@ hr{
 
 /* Requests Display */
 
-#requestDisplay {
+.underline {
   text-decoration: underline;
 }
