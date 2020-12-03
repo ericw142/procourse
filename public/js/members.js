@@ -4,6 +4,9 @@ $(document).ready(() => {
   $.get("/api/user_data").then(data => {
     
     $(".member-name").text(`${data.firstname}  ${data.lastname}`);
+    $('.github').text(`${data.username}`);
+    $('.email').text(`${data.email}`);
+    let age = $('.age').text(`${data.age}`);
   });
 
   // Modal
