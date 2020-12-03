@@ -99,6 +99,7 @@ $(document).ready(() => {
           }).then((response) => {
             alert("Successfully created request");
             modal.style.display = "none";
+            window.location.assign('/projectdetails/'+projectId);
           })
         })
       }
