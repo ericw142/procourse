@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         Collaborator.belongsTo(models.Project, {
             foreignKey: {
                 allowNull: false
-            }
+            },
+            onDelete: "cascade"
         })
     }
 
