@@ -4,8 +4,11 @@ $(document).ready(() => {
   $.get("/api/user_data").then(data => {
     
     $(".member-name").text(`${data.firstname}  ${data.lastname}`);
+    $('.github').text(`${data.github}`);
+    $('.email').text(`${data.email}`);
+    let age = $('.age').text(`${data.age}`);
+    console.log(age);
   });
-
   // Modal
     const modal = document.getElementById("myModal");
     const btn = document.getElementById("myBtn");
@@ -83,7 +86,7 @@ $(document).ready(() => {
           // Creating Search Results from Title
           for (var i = 0; i < response.length; i++) {
 
-            let searchCard = $("<div>");
+            let searchCard = $("<div class='card search'>");
 
             let searchTitle = $("<a>");
             searchTitle.text(response[i].title);

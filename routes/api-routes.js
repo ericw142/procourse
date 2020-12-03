@@ -65,6 +65,7 @@ module.exports = function (app) {
         lastname: req.user.lastname,
         github: req.user.github,
         email: req.user.email,
+        age: req.user.createdAt,
         id: req.user.id
       });
     }
@@ -190,7 +191,6 @@ module.exports = function (app) {
 
 
   // Project Search
-
   app.get("/api/titlesearch/:term", (req, res) => {
     let term = req.params.term;
 
@@ -207,6 +207,21 @@ module.exports = function (app) {
       })
 
   })
+  ///////////////////////////////////////////////////////////////
+  // project feeds/////////////////////////////////////////////
+
+  app.get("/feeds", (req, res) => {
+    db.Project.findAll({
+      limit: 20
+    })
+    .then((project) =>{
+      res.render('feeds', {project})
+    })
+    .catch((err) => {
+      console.log('Sorry, Something went wrong, : ', err)
+    });
+  })
+  //////////////////////////////////////////////////////////////////
 
   app.get("/api/usersearch/:term", (req, res) => {
     let term = req.params.term;

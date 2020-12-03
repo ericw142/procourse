@@ -2,9 +2,8 @@
 
 <div class="container-lg">
     <div class="row">
-    <div class="col-sm-8">
-          <h1 class="detailsHeader"> <strong> {{project.title}} </strong> <br>
-        Project ID#: {{project.id}} </h1>
+    <div class="col-sm-9 projects">
+          <h1 class="detailsHeader"> <strong> {{project.title}} overview</strong> <br> </h1>
 
    <div id="detailsDiv">
     <h3>Title</h3>
@@ -21,8 +20,8 @@
                         
     </div>
     
-    <button id="requestBtn" data-value={{project.id}} data-toggle="modal" data-target="#myModal">Request to Join</button>
-    <button id="showReq" data-value={{project.id}} >View Requests To Join</button>
+    <button class="btn btn-info" id="requestBtn" data-value={{project.id}} data-toggle="modal" data-target="#myModal">Request to Join</button>
+    <button class="btn btn-info" id="showReq" data-value={{project.id}} >View Requests To Join</button>
     <div class="requestSection{{project.id}}">
 
     </div>
@@ -47,16 +46,16 @@
         </div>
         </div>
     
-</div>
     </div>
-    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-3">
         <div class="row">
-        <div class="col-sm">
+        <div class="col-sm owner">
             <div class="card" id="project-details" >
-                <img src="/images/icons8-customer-90.png" alt="profile avatar">
+                <img class='proj' src="/images/Project-icon.png" width="100px" alt="project avatar">
             <div class="card-body">
-            <h5 class="card-title">Profile</h5>
-            <p class="card-text">owned by: <span class="userid"></span></p>
+            <h5 class="card-title">Priority:</h5>
+            <p class="card-text">Owned by: <span class="userid"></span></p>
             <p class="card-text">technologies used: <span class="tech"></span></p>
           </div>
           </div>
@@ -65,8 +64,59 @@
         
     </div>
   </div>
+
+  {{!-- project kanban --}}
+  <div class="row">
+    <div class="col-md">
+      <div class="kan-title">
+       <h3 class="heading">Project KanBan</h3>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">To Do</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">In Progress</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">Completed</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+    </div>
+
+    </div>
+   
   
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
 <script type="text/javascript" src="/js/project.js"></script>
