@@ -20,9 +20,11 @@
                         
     </div>
     
-    <button class="btn btn-info" id="requestBtn" data-value={{project.id}} data-toggle="modal" data-target="#myModal">Request to Join</button>
-    <button class="btn btn-info" id="showReq" data-value={{project.id}} >View Requests To Join</button>
-    <div class="requestSection{{project.id}}">
+      <button class="btn btn-info" id="requestBtn" data-value="{{project.id}}" data-toggle="modal" data-target="#myModal">Request to
+    Join</button>
+
+    <button class="btn btn-info" id="showReq" data-id="{{project.UserId}}" data-value="{{project.id}}">View Requests</button>
+  <div class="requestSection{{project.id}}">
 
     </div>
 
@@ -72,6 +74,7 @@
        <h3 class="heading">Project KanBan</h3>
     </div>
     </div>
+
   </div>
   <div class="row">
       <div class="col-md-4">
