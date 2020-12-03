@@ -1,54 +1,122 @@
-{{>navbar}}
+ {{>navbar}}
 
+<div class="container-lg">
+    <div class="row">
+    <div class="col-sm-9 projects">
+          <h1 class="detailsHeader"> <strong> {{project.title}} overview</strong> <br> </h1>
 
+   <div id="detailsDiv">
+    <h3>Title</h3>
+    <p>{{project.title}}</p>
+    <br>
+    <h3>Description</h3>
+    <p>{{project.description}}</p>
+    <br>
+     <h3>Languages</h3>
+    <p>{{project.tag}}</p>
 
-<h1 class="detailsHeader">Project Details</h1>
-<p id="detail" class="detailsHeader"> <strong> {{project.title}} </strong> <br>
-  ID#: {{project.id}} </p>
+    <a  type="button" class="viewCollab" data-value="{{project.id}}">View Collaborators</a>
+    <div class="collabSection{{project.id}}">
+                        
+    </div>
+    
+    <button class="btn btn-info" id="requestBtn" data-value={{project.id}} data-toggle="modal" data-target="#myModal">Request to Join</button>
+    <button class="btn btn-info" id="showReq" data-value={{project.id}} >View Requests To Join</button>
+    <div class="requestSection{{project.id}}">
 
-<div id="detailsDiv">
-  <h3>Title</h3>
-  <p>{{project.title}}</p>
-  <br>
-  <h3>Description</h3>
-  <p>{{project.description}}</p>
-  <br>
+    </div>
 
-  <a class="viewCollab" data-value="{{project.id}}">View Collaborators</a>
-  <div class="collabSection{{project.id}}">
+    <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
 
-  </div>
-
-  <button id="requestBtn" data-value={{project.UserId}} data-toggle="modal" data-target="#myModal">Request to
-    Join</button>
-
-  <button id="showReq" data-id="{{project.UserId}}" data-value={{project.id}}>View Requests</button>
-  <div class="requestSection{{project.id}}">
-
-  </div>
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-
-      <!-- Request Form -->
-      <form id="collab-form">
-        <div class="form-group">
-          <label for="create-project">Request to Collaborate</label>
-          <input type="text" name="message" class="form-control form-control-sm" placeholder="enter a message here">
-          <br>
-          <p>Your username, email and message will be sent to the owner of this project.</p>
+            <!-- Create a Project form -->
+            <form id="collab-form">
+                <div class="form-group">
+                  <label for="create-project">Request to Collaborate</label>
+                  <input type="text" name="message" class="form-control form-control-sm" placeholder="enter a message here">
+                  <br>
+                  <p>Your username, email and message will be sent to the owner of this project.</p>
+                </div>
+                     
+                <input type="submit">
+            </form>
         </div>
-
-        <input type="submit">
-      </form>
+        </div>
+    
+    </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="row">
+        <div class="col-sm owner">
+            <div class="card" id="project-details" >
+                <img class='proj' src="/images/Project-icon.png" width="100px" alt="project avatar">
+            <div class="card-body">
+            <h5 class="card-title">Priority:</h5>
+            <p class="card-text">Owned by: <span class="userid"></span></p>
+            <p class="card-text">technologies used: <span class="tech"></span></p>
+          </div>
+          </div>
+        </div>
+         </div>
+        
     </div>
   </div>
 
+  {{!-- project kanban --}}
+  <div class="row">
+    <div class="col-md">
+      <div class="kan-title">
+       <h3 class="heading">Project KanBan</h3>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">To Do</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">In Progress</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="title">
+           <h3 class="heading">Completed</h3>
+        </div>
+        <div class="sortable">
+          <div class="card">
+            <input type="text" class="enter" placeholder="enter task">
+            <button type="button" class="btn btn-secodary but" data-toggle="tooltip" data-placement="top" title="click to Add new card" id="add-phase"> Add</button> 
+          </div>
+        </div>
+    </div>
+
+    </div>
+   
+  
 </div>
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+      integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+      crossorigin="anonymous"
+    ></script>
 <script type="text/javascript" src="/js/project.js"></script>
