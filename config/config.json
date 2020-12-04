@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "School1",
-    "database": "testuser",
+    "password": "password123",
+    "database": "findaproject_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
