@@ -1,31 +1,16 @@
+
 $(document).ready(() => {
-    //  Delete Projects
-    $(".del").on('click', function () {
-      let id = $(this).data('value');
-      let usersId = $(this).data('id')
-      $.ajax({
-        url: "/api/user_data",
+  function getFeeds(event){
+    $.ajax({
+        url: "/api/feeds",
         method: "GET"
-      }).then(function (response) {
-  
-  
-        if (response.id === usersId) {
-      
-      $.ajax({
-        method: "DELETE",
-        url: "/api/delete_project/" + id
-      })
-        .then(() => {
-          window.location.assign('/feeds');
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      } else {
-        alert("You do not have permission to delete");
-      }
+    }).then((res) => {
+          
+        $('.feeds').empty();
+        console.log(res);
     })
-  })
+
+}
   
   $(".viewCollab").on("click", function (event) {
       event.preventDefault();

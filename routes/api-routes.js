@@ -129,6 +129,76 @@ module.exports = function (app) {
     });
   })
   //////////////////////////////////////////////////////////////////
+  // kanban //////////////////////////////////////
+  /// get tasks ///////////////////////////////
+  app.get("/kanban", (req, res) => {
+    db.Kanban.findAll({
+
+    })
+    .then((kanban) => {
+      res.render('project', {kanban})
+    })
+    .catch((err) => {
+      console.log('Sorry, wrong task name, : ', err)
+    });
+  })
+  //// create new todo///////////////////////
+  app.post("/api/create_todo", (req, res) => {
+    let errors = []
+    console.log('am here')
+    if(!req.body.todo){
+      errors.push({ text: "Please Add a Task, todo Not Saved, " });
+      res.render('error', { errors })
+    }else{
+      db.Kanban.create({
+        todo: req.body.todo,
+        inProgress: req.body.inProgress,
+        completed: req.body.completed,
+        ProjectId: req.body.projectID
+      }).then((result) => {
+        console.log(result);
+        return res.json(result);
+      })
+        .catch(err => {
+          res.status(401).json(err);
+        });
+    }
+  })
+  ////// move todo to inprogress////////////
+  app.put('/api/inprogress',(req,res) => {
+    let todoId = req.params.id;
+    db.Kanban.update(
+      {
+        inProgress: true
+
+      },
+      {
+        where: {
+          id: todoId
+        }
+      }
+    ).then((result) => {
+      return res.json(result);
+    })
+  })
+  ///// move todo to completed////////////////////
+  app.put('/api/completed',(req,res) => {
+    let todoId = req.params.id;
+    db.Kanban.update(
+      {
+        completed: true
+
+      },
+      {
+        where: {
+          id: todoId
+        }
+      }
+    ).then((result) => {
+      return res.json(result);
+    })
+  })
+  /////////////////////////////////////////////////
 
   // Route to search by username
   app.get("/api/usersearch/:term", (req, res) => {
