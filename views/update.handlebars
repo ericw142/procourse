@@ -1,20 +1,37 @@
 {{>navbar}}
 
+<div class="container-lg">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 id="update">Updating : {{project.title}}</h1>
+            <h3 id="updId"> <strong> {{project.title}} </strong> <br>
+                ID#: {{project.id}} </h3>
+            
+            <form  id="updForm" data-id={{project.id}}>
+                      <div class="form-group">
+                        <label for="title update-title">Title:</label><br>
+                        <textarea id="title" class="title-area" name="title">{{project.title}}</textarea>
+                      </div>
+                      <div class="form-group">
+                          <label type="hidden" for="description">Description:</label><br>
+                          <textarea id="description" class="description-area" name="description" cols="30" rows="10">{{project.description}}</textarea>
+                          <br>
+                      </div>
+                      <button class="btn btn-info" id="updateBtn" type="submit">Update</button>
+            </form>
+            {{!-- <form id="updForm" data-id={{project.id}}>
+                <label for="title">Title:</label><br>
+                <textarea id="title" name="title">{{project.title}}</textarea>
+                <br>
+                <label type="hidden" for="description">Description:</label><br>
+                <textarea id="description" name="description" cols="30" rows="10">{{project.description}}</textarea>
+                <br>
+                <button id="updateBtn" type="submit">Update</button>
+            </form> --}}
 
-
-<h1 id="update">Editing Your Project: </h1>
-<p id="updId"> <strong> {{project.title}} </strong> <br>
-    ID#: {{project.id}} </p>
-
-<form id="updForm" data-id={{project.id}}>
-    <label for="title">Title:</label><br>
-    <textarea id="title" name="title">{{project.title}}</textarea>
-    <br>
-    <label type="hidden" for="description">Description:</label><br>
-    <textarea id="description" name="description" cols="30" rows="10">{{project.description}}</textarea>
-    <br>
-    <button id="updateBtn" type="submit">Update</button>
-</form>
+        </div>
+    </div>
+</div>
 
 
 

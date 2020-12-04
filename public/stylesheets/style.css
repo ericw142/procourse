@@ -17,10 +17,6 @@ h2{
 }
 .avatar{
   text-align: center;
-
-}
-.box{
-  color: #fcfffa;
 }
 #detailsDiv{
   border-radius: 10px;
@@ -55,6 +51,9 @@ hr{
 .card-columns{
   color: #fcfffa;
 }
+.update-title{
+  color: #fcfffa;
+}
 .dashboard{
   float: left;
   color: #fcfffa;
@@ -66,17 +65,24 @@ hr{
   float: left;
   min-width: 320px;
 }
+#project-container{
+  margin: 10px;
+  padding: 10px;
+}
 .head{
   color: #fcfffa;
   min-width: 300px;
 }
-.kanban{
+.results{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
 }
+
 .heading{
   color: white !important;
 }
-#project-details{
-}
+
 .kan-title{
   text-align: center;
   font-weight: bolder;
@@ -115,6 +121,26 @@ hr{
   overflow-wrap: break-word;
   min-height: fit-content;
 }
+.title-area{
+  width: 550px;
+  border-radius: 10px;
+}
+.description-area{
+  width: 550px;
+  border-radius: 10px;
+}
+.footer{
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white !important;
+  text-align: center;
+}
+#feeds-coontainer{
+  position: relative;
+  min-height: 100vh;
+
+}
 
 
 .searchCard {
@@ -125,6 +151,7 @@ hr{
 #updForm, #update, #updId{
   text-align: center;
   color: #aaa;
+  width: 100%;
 }
 
 #update{
