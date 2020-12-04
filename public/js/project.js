@@ -66,7 +66,8 @@ $(document).ready(() => {
   $(btn).on("click", function (event) {
     event.preventDefault();
 
-    let projectId = $(this).data("id");
+    let projectId = $(this).data("value");
+    let userId = $(this).data("id");
 
     // If current user is owner of project, display message
     $.ajax({
@@ -79,7 +80,7 @@ $(document).ready(() => {
       let requesterUsername = response.username;
       let requesterEmail = response.email;
 
-      if (requesterId === projectId) {
+      if (requesterId === userId) {
         alert("You are the owner of this project");
       } else {
         // Else, display modal form for request to join the project
@@ -113,23 +114,6 @@ $(document).ready(() => {
 
   })
 
-
-
-  //======================================
-  let id = $("#showReq").data("value");
-  let jquerySelector = ".requestSection" + id;
-
-  $.ajax({
-    url: "/viewRequests/" + id,
-    method: "GET"
-  }).then(function (res) {
-    $(jquerySelector).empty();
-
-    let reqLength = res.length;
-    let numOfReq = $("<p>");
-    numOfReq.text("This project has " + reqLength + " requests to join")
-    $("#detail").append(numOfReq);
-  })
 
 
   $("#showReq").on("click", function (event) {

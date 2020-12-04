@@ -1,17 +1,6 @@
 
 $(document).ready(() => {
-  function getFeeds(event){
-    $.ajax({
-        url: "/api/feeds",
-        method: "GET"
-    }).then((res) => {
-          
-        $('.feeds').empty();
-        console.log(res);
-    })
-
-}
-  
+  // View Collaborators 
   $(".viewCollab").on("click", function (event) {
       event.preventDefault();
    

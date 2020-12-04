@@ -12,31 +12,32 @@
 <div class="container-lg">
   <div class="row">
     <div class="col-md-8">
-       <div class="col-sm-4 dashboard">
-         <div class="col">
-           <h3>DashBoard</h3>
-           <div class="head">
-             <h4 >Github: <span class="github"></span></h4>
-             <h4 >Email: <span class="email"></span></h4>
-             <h4>Member since: <span class="age"></span></h4>
-                    <!-- Trigger/Open The Modal -->
-          <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">New Project</button>
-           </div>
-          </div>
-
-        </div>
-        <div class="col-sm-4 requests">
-          <div class="col">
-            <h3>Pending Requests</h3>
-            <span id="requestDisplay" class="underline"></span>
-            <div class="projectTracker">
-              
-            </div>
+      <div class="col-sm-4 dashboard">
+        <div class="col">
+          <h3>DashBoard</h3>
+          <div class="head">
+            <h4>Github: <span class="github"></span></h4>
+            <h4>Email: <span class="email"></span></h4>
+            <h4>Member since: <span class="age"></span></h4>
+            <!-- Trigger/Open The Modal -->
+            <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" id="myBtn">New
+              Project</button>
           </div>
         </div>
 
-  </div>
-  <!-- Search Section -->
+      </div>
+      <div class="col-sm-4 requests">
+        <div class="col">
+          <h3>Pending Requests</h3>
+          <span id="requestDisplay" class="underline"></span>
+          <div class="projectTracker">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Search Section -->
     <div class="col-md-4">
 
       <form class="search-form">
@@ -57,67 +58,68 @@
       </div>
 
     </div>
-</div>
+  </div>
 </div>
 
 <div class="container-lg">
-    <div class="row">
-      <div class="col-md-12">
-        
-        <div class="card-colums" id="project-container">
-            <!-- Create Project -->
-              <!-- The Modal -->
-              <div id="myModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                  <span class="close">&times;</span>
+  <div class="row">
+    <div class="col-md-12">
 
-                  <!-- Create a Project form -->
-                  <form action="/api/create_project" method="POST" id="create-form">
-                      <div class="form-group">
-                        <label for="create-project">Create New Project</label>
-                        <input type="text" name="title" class="form-control form-control-sm" placeholder="project title" placeholder="Title">
-                      </div>
-                      <div class="form-group">
-                          <label for="project-description">Description</label>
-                          <textarea name="description"class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
-                      </div>
-                      <div class="form-group">
-                          <label for="tag">Add Languages</label>
-                          <input type="text" name="tag" placeholder="seperate tags by comma">
-                      </div>
-                      <input type="submit">
-                  </form>
-                </div>
+      <div class="card-colums" id="project-container">
+        <!-- Create Project -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <!-- Create a Project form -->
+            <form action="/api/create_project" method="POST" id="create-form">
+              <div class="form-group">
+                <label for="create-project">Create New Project</label>
+                <input type="text" name="title" class="form-control form-control-sm" placeholder="project title"
+                  placeholder="Title">
               </div>
-             <!-- Cards -->
-             <div class="column" >
-              {{#each project}}
-                <div class="card prod">
-                    <div class="card-body">
 
-                    <h3><a class="card-title title" href="/projectdetails/{{id}}">{{title}}</a></h3><hr>
-                    <h6 class="card-subtitle mb-2 text-muted desc">Project Description</h6>
-                    <p class="card-text">{{description}}</p>
-                    {{!-- Collab Section --}}
-                      <a type="button" class="viewCollab" data-value="{{id}}">View Collaborators</a>
-                      <div class="collabSection{{id}}">
-                        
-                      </div>
+              <div class="form-group">
+                <label for="project-description">Description</label>
+                <textarea name="description" class="form-control form-control-sm" id="" cols="5" rows="5"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="tag">Add Languages</label>
+                <input type="text" name="tag" placeholder="seperate tags by comma">
+              </div>
+              <input type="submit">
+            </form>
+          </div>
+        </div>
+        <!-- Cards -->
+        <div class="column">
+          {{#each project}}
+          <div class="card prod">
+            <div class="card-body">
 
-                    <a class="btn btn-info" type="button" href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
-                     <button class="del btn btn-info" id="deleteProject" data-id="{{UserId}}" data-value="{{id}}">delete</button>
+              <h3><a class="card-title title" href="/projectdetails/{{id}}">{{title}}</a></h3>
+              <hr>
+              <h6 class="card-subtitle mb-2 text-muted desc">Project Description</h6>
+              <p class="card-text">{{description}}</p>
+              {{!-- Collab Section --}}
+              <a type="button" class="viewCollab" data-value="{{id}}">View Collaborators</a>
+              <div class="collabSection{{id}}">
 
-
-                    </div>
-                </div>
-              
-              {{/each}}
+              </div>
+              <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj btn btn-primary"> Update</a>
+              <button class="del btn btn-primary" id="deleteProject" data-id="{{UserId}}"
+                data-value="{{id}}">delete</button>
             </div>
+          </div>
+
+          {{/each}}
         </div>
       </div>
     </div>
   </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/members.js"></script>

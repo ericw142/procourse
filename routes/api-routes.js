@@ -236,9 +236,9 @@ module.exports = function (app) {
       .then((result) => {
         return res.json(result);
       })
-      // .catch(err => {
-      //   res.status(401).json(err);
-      // });
+      .catch(err => {
+        res.status(401).json(err);
+      });
 
   })
 
@@ -305,9 +305,7 @@ module.exports = function (app) {
     }).then((collab) => {
       return res.json(collab);
     })
-      .catch(err => {
-        res.status(401).json(err);
-      })
+     
   })
 
   // Request to Collaborate
@@ -344,9 +342,7 @@ module.exports = function (app) {
     }).then((result) => {
       return res.json(result);
     })
-      // .catch(err => {
-      //   res.status(401).json(err);
-      // });
+      
   })
   // View Requests
   app.get("/viewRequests/:id", (req, res) => {
