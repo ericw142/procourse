@@ -29,9 +29,6 @@ $( document ).ready(function() {
         }
       });
     } );
-  
-  });
-  
 
     $(function() {
       $("#kanban").on("click", function(event) {
@@ -53,29 +50,31 @@ $( document ).ready(function() {
           }
         );
       });
-    
-    //   $("#kanban").on("submit", function(event) {
-    //     // Make sure to preventDefault on a submit event.
-    //     event.preventDefault();
-
-    //     let id = $(this).data("id")
-    //     let newTask = {
-    //       todo: $("#ca").val().trim(),
-    //       inProgress: false,
-    //       completed: false,
-    //       projectid: id
-    //     };
-    
-    //     // Send the POST request.
-    //     $.ajax("create_todo", {
-    //       type: "POST",
-    //       data: newTask
-    //     }).then(
-    //       function() {
-    //         alert("Added a new Task");
-    //         // Reload the page to get the updated list
-    //         location.reload();
-    //       }
-    //     );
-    //   });
     });
+
+    $("#kanban").on("submit", function(event) {
+        // Make sure to preventDefault on a submit event.
+        event.preventDefault();
+        console.log(event);
+
+        let id = $(this).data("id")
+        let newTask = {
+          todo: $("#ca").val().trim(),
+          inProgress: false,
+          completed: false,
+          projectid: id
+        };
+    
+        // Send the POST request.
+        $.ajax("/api/create_todo", {
+          type: "POST",
+          data: newTask
+        }).then(
+          function() {
+            alert("Added a new Task");
+            // Reload the page to get the updated list
+            location.reload();
+          }
+        );
+      });
+});
