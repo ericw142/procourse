@@ -1,5 +1,4 @@
-$(document).ready(() => {
-  // Modal
+// Modal
   const modal = document.getElementById("myModal");
   const btn = document.getElementById("requestBtn");
   const span = document.getElementsByClassName("close")[0];
@@ -208,6 +207,5 @@ $(document).ready(() => {
       }
     })
   })
-})
 
 
