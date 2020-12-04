@@ -129,6 +129,18 @@ hr{
   width: 550px;
   border-radius: 10px;
 }
+.footer{
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white !important;
+  text-align: center;
+}
+#feeds-coontainer{
+  position: relative;
+  min-height: 100vh;
+
+}
 
 
 .searchCard {
