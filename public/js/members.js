@@ -180,6 +180,10 @@ $(document).ready(() => {
     let requestNum = 0;
     let projectArr = [];
     let tracker = false;
+    if (response[0] === undefined) {
+      $("#requestDisplay").text("No pending requests");
+      return;
+    }
     // Filter through every collaborator on every project owned by the user
     for (var i = 0; i < response[0].Projects.length; i++) {
       for (var x = 0; x < response[0].Projects[i].Collaborators.length; x++) {
