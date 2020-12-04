@@ -20,7 +20,7 @@
                         
                       </div>
                     <a href="#" class="card-link">Created By</a>
-                    <a href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
+                    <a type='button'href="/api/update/{{id}}" data-value="{{id}}" class="updateProj"> Update</a>
                      <button class="del btn btn-primary" id="deleteProject" data-value={{id}}>delete</button>
 
                     </div>
@@ -33,4 +33,6 @@
     </div>
   </div>
   <script type="text/javascript" src="js/feeds.js"></script>
+  
+  {{>footer}}
   

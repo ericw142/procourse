@@ -108,7 +108,7 @@ $(document).ready(() => {
         for (var i = 0; i < response.length; i++) {
           // Prepends all projects from matching users
           for (var x = 0; x < response[i].Projects.length; x++) {
-            let searchCard = $("<div>");
+            let searchCard = $("<div class='results'>");
             searchCard.addClass('searchCard')
 
             let searchTitle = $("<a>");
