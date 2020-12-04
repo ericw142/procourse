@@ -13,9 +13,12 @@ module.exports = (sequelize, DataTypes) => {
   
     Kanban.associate = function (models) {
       Kanban.belongsTo(models.Project, {
-        foreignKey: { allowNull: false}
-      });
-    };
+        foreignKey: {
+          allowNull: false
+      },
+      onDelete: "cascade"
+  })
+}
     
   
     return Kanban;
