@@ -44,14 +44,20 @@ $(document).ready(() => {
       method: "GET"
     }).then(function (response) {
       $(jquerySelector).empty();
-
       console.log(response.length, "resp");
+      if (response.length < 1) {
+        let noCollab = $("<p>");
+        noCollab.text("No collaborators");
+        $(jquerySelect).append(noCollab)
+      }
+      else {
 
-      for (var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
 
-        let collabName = $("<p>");
-        collabName.text(response[i].requesterUsername);
-        $(jquerySelector).append(collabName);
+          let collabName = $("<p>");
+          collabName.text(" - " + response[i].requesterUsername);
+          $(jquerySelector).append(collabName);
+        }
       }
     })
   })
@@ -60,7 +66,7 @@ $(document).ready(() => {
   $(btn).on("click", function (event) {
     event.preventDefault();
 
-    let projectId = $(this).data("value");
+    let projectId = $(this).data("id");
 
     // If current user is owner of project, display message
     $.ajax({
@@ -99,7 +105,7 @@ $(document).ready(() => {
           }).then((response) => {
             alert("Successfully created request");
             modal.style.display = "none";
-            window.location.assign('/projectdetails/'+projectId);
+            window.location.assign('/projectdetails/' + projectId);
           })
         })
       }
@@ -161,8 +167,15 @@ $(document).ready(() => {
 
           for (var i = 0; i < res.length; i++) {
             let collabName = $("<p>");
-            collabName.text(res[i].requesterUsername);
+            collabName.text("Username: " + res[i].requesterUsername);
+            
+            let collabEmail = $("<p>");
+            collabEmail.text("Email: " + res[i].requesterEmail);
+            collabName.addClass("underline");
+            collabEmail.addClass("underline")
+
             $(jquerySelector).append(collabName);
+            $(jquerySelector).append(collabEmail);
             let message = $("<p>");
             message.text(res[i].requesterMessage);
             $(jquerySelector).append(message);

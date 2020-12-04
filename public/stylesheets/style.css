@@ -207,3 +207,9 @@ hr{
   text-decoration: none;
   cursor: pointer;
 }
+
+/* Requests Display */
+
+.underline {
+  text-decoration: underline;
+}
