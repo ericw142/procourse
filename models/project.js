@@ -27,11 +27,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  Project.associate = function (models) {
-    Project.hasMany(models.Kanban, {
-      onDelete: "cascade"
-    });
-  };
-
   return Project;
 };
