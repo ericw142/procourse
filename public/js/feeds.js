@@ -1,32 +1,5 @@
 $(document).ready(() => {
-    //  Delete Projects
-    $(".del").on('click', function () {
-      let id = $(this).data('value');
-      let usersId = $(this).data('id')
-      $.ajax({
-        url: "/api/user_data",
-        method: "GET"
-      }).then(function (response) {
-  
-  
-        if (response.id === usersId) {
-      
-      $.ajax({
-        method: "DELETE",
-        url: "/api/delete_project/" + id
-      })
-        .then(() => {
-          window.location.assign('/feeds');
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      } else {
-        alert("You do not have permission to delete");
-      }
-    })
-  })
-  
+  // View Collaborators 
   $(".viewCollab").on("click", function (event) {
       event.preventDefault();
    

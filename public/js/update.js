@@ -1,5 +1,5 @@
 $(document).ready(() => {
-
+// Submit function for update page
   $("#updForm").on("submit", function (event) {
     console.log("CLICK");
     event.preventDefault();
