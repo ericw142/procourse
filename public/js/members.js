@@ -146,7 +146,15 @@ $(document).ready(() => {
   //  Delete Projects
   $(".del").on('click', function () {
     let id = $(this).data('value');
-    console.log(id);
+    let usersId = $(this).data('id')
+    $.ajax({
+      url: "/api/user_data",
+      method: "GET"
+    }).then(function (response) {
+
+
+      if (response.id === usersId) {
+    
     $.ajax({
       method: "DELETE",
       url: "/api/delete_project/" + id
@@ -157,7 +165,11 @@ $(document).ready(() => {
       .catch(err => {
         console.log(err);
       })
+    } else {
+      alert("You do not have permission to delete");
+    }
   })
+})
 
 // Display number of outstanding requests
   $.ajax({
