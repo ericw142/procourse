@@ -337,4 +337,19 @@ module.exports = function (app) {
       return res.json(result);
     })
   })
+
+    // verify collab only req once per project
+    app.get("/api/collabver/:id", (req, res) => {
+      id = req.params.id;
+      
+      db.Project.findAll({
+       
+        where: {
+          id: id
+        },
+          include: [{model: db.Collaborator}]
+      }).then((result) => {
+        return res.json(result);
+      })
+    })
 };
